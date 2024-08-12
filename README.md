@@ -1,7 +1,3 @@
-Here’s a revised version with updated and working logos for NLTK and Jupyter Notebook:
-
----
-
 # ![Book Icon](https://img.icons8.com/fluency/48/000000/book.png) Book Analysis Project: *"Miracle in the Andes"*
 
 ---
@@ -134,7 +130,7 @@ Book-Analysis/
 ### **Technologies Used:**
 
 - ![Python](https://img.icons8.com/fluency/48/000000/python.png) **Python**: Core programming language for text processing and analysis.
-- <img src="https://www.vectorlogo.zone/logos/nltk/nltk-icon.svg" alt="NLTK" height="48"/> **NLTK**: Used for Natural Language Processing and sentiment analysis.
+-   <img src=https://github.com/Shahriyar31/Book-Analysis/blob/main/Images/NLTK.jpeg height="48"/> **NLTK**: Used for Natural Language Processing and sentiment analysis.
 - <img src="https://raw.githubusercontent.com/github/explore/main/topics/jupyter-notebook/jupyter-notebook.png" alt="Jupyter" height="48"/> **Jupyter Notebooks**: For interactive data exploration and visualization.
 
 ---
@@ -169,7 +165,6 @@ Book-Analysis/
 For any inquiries or support, please contact:
 
 - **Name**: Farhan Shahriyar
-- **Email**: shahriyar@example.com
 - **GitHub**: [Shahriyar31](https://github.com/Shahriyar31)
 
 ---
@@ -182,7 +177,7 @@ For any inquiries or support, please contact:
 
 <p align="center">
   <img src="https://img.icons8.com/fluency/48/000000/python.png" alt="Python" height=48/>
-  <img src="https://www.nltk.org/images/logo.png" alt="NLTK" height="48"/>
+  <img src=https://github.com/Shahriyar31/Book-Analysis/blob/main/Images/NLTK.jpeg height="48"/>
   <img src="https://raw.githubusercontent.com/github/explore/main/topics/jupyter-notebook/jupyter-notebook.png" alt="Jupyter" height= 48/>
 </p>
 
