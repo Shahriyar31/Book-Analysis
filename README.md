@@ -1,129 +1,191 @@
-# Book-Analysis
-Book Analysis Project: "Miracle in the Andes" This book analysis project uses Python and Natural Language Processing (NLP) to process and analyze the text from "Miracle in the Andes." The project involves several key steps to extract insights and perform sentiment analysis.
-### Description and Summary of the Book Analysis Project
+Here’s a revised version with updated and working logos for NLTK and Jupyter Notebook:
 
-This book analysis project involves multiple stages of processing the text from a book, "Miracle in the Andes," using Python and Natural Language Processing (NLP) techniques. Below is a summary of the key steps and the purpose of each code segment.
+---
 
-### 1. Loading and Preparing the Text
+# ![Book Icon](https://img.icons8.com/fluency/48/000000/book.png) Book Analysis Project: *"Miracle in the Andes"*
 
-**Code:**
-```python
-with open("miracle_in_the_andes.txt", "r", encoding="utf-8") as file:
-    book = file.read()
-print(type(book))
+---
+
+📖 **Book Analysis Project** is a comprehensive data analysis project that leverages Python and Natural Language Processing (NLP) techniques to analyze the text of the book *"Miracle in the Andes"*. This project involves various steps, including text processing, chapter analysis, word frequency analysis, and sentiment analysis, to extract meaningful insights from the book.
+
+---
+
+### **Key Features:**
+
+- **Text Loading and Preparation**: Efficiently loads and prepares the text for analysis.
+- **Chapter Count Analysis**: Uses multiple methods to accurately count the number of chapters in the book.
+- **Word and Sentence Extraction**: Identifies specific words or phrases, such as "love," and extracts relevant sentences.
+- **Word Frequency Analysis**: Determines the most frequently used words, filtering out common English stopwords.
+- **Sentiment Analysis**: Analyzes the overall sentiment of the book and individual chapters, highlighting emotional trends.
+
+---
+
+### **Project Overview**
+
+1. **Loading and Preparing the Text**
+
+   - **Description**: The project begins by loading the text of *"Miracle in the Andes"* from a file. This step ensures that the text is in the correct format for subsequent analysis.
+
+   - **Code Example**:
+   ```python
+   with open("miracle_in_the_andes.txt", "r", encoding="utf-8") as file:
+       book = file.read()
+   print(type(book))
+   ```
+
+2. **Counting Chapters**
+
+   - **Description**: The number of chapters is counted using both string methods and regular expressions to ensure accuracy.
+
+   - **Code Example**:
+   ```python
+   chapter_count_str = book.count("Chapter")
+   import re
+   pattern = re.compile(r"Chapter [0-9]+")
+   findings = re.findall(pattern, book)
+   print("Chapters:", len(findings))
+   ```
+
+3. **Extracting Sentences with Specific Words**
+
+   - **Description**: The project uses regular expressions to extract sentences containing specific words like "love," providing insights into the context in which these words are used.
+
+   - **Code Example**:
+   ```python
+   pattern = re.compile(r"[A-Z][^.]*\blove\b[^.]*\.")
+   findings = re.findall(pattern, book)
+   print("Sentences with 'love':", findings)
+   ```
+
+4. **Finding and Filtering the Most Used Words**
+
+   - **Description**: The project identifies the most frequently used words in the book and filters out common stopwords, revealing the key terms that define the text.
+
+   - **Code Example**:
+   ```python
+   from nltk.corpus import stopwords
+   nltk.download("stopwords")
+   pattern = re.compile(r"[a-zA-Z]+")
+   findings = re.findall(pattern, book.lower())
+   english_stopwords = stopwords.words("english")
+
+   d = {}
+   for word in findings:
+       if word in d:
+           d[word] += 1
+       else:
+           d[word] = 1
+
+   d_list = sorted([(value, key) for (key, value) in d.items()], reverse=True)
+   filtered_words = [(word, count) for (count, word) in d_list if word not in english_stopwords]
+   print("Filtered words:", filtered_words[:10])
+   ```
+
+5. **Sentiment Analysis of the Entire Book**
+
+   - **Description**: Sentiment analysis is performed on the entire book to assess the overall emotional tone, using NLTK’s Sentiment Intensity Analyzer.
+
+   - **Code Example**:
+   ```python
+   from nltk.sentiment import SentimentIntensityAnalyzer
+   analyzer = SentimentIntensityAnalyzer()
+   print(analyzer.polarity_scores(book))
+   ```
+
+6. **Sentiment Analysis of Individual Chapters**
+
+   - **Description**: The book is divided into chapters, and sentiment analysis is performed on each one, identifying the most positive and negative chapters.
+
+   - **Code Example**:
+   ```python
+   pattern = re.compile("Chapter [0-9]+")
+   chapters = re.split(pattern, book)[1:]
+
+   for nr, chapter in enumerate(chapters):
+       scores = analyzer.polarity_scores(chapter)
+       print(nr + 1, scores)
+   ```
+
+---
+
+### **Project Structure:**
+
+```
+Book-Analysis/
+│
+├── analysis/
+│   ├── chapter_analysis.py   # Chapter counting and analysis
+│   ├── word_frequency.py     # Word frequency analysis
+│   ├── sentiment_analysis.py # Sentiment analysis of the book
+│   └── sentence_extraction.py # Extracting specific sentences
+│
+├── data/
+│   └── miracle_in_the_andes.txt # Book text file
+│
+├── notebooks/
+│   ├── data_exploration.ipynb  # Jupyter notebook for exploratory analysis
+│
+├── requirements.txt           # Project dependencies
+└── README.md                  # Project documentation
 ```
 
-**Description:**
-The book's text is loaded from a file named `miracle_in_the_andes.txt` and stored as a string in the `book` variable. The type of the `book` variable is then confirmed to be a string.
+---
 
-### 2. Counting Chapters
+### **Technologies Used:**
 
-**Code:**
-```python
-chapter_count_str = book.count("Chapter")
-print("Chapters (string method):", chapter_count_str)
+- ![Python](https://img.icons8.com/fluency/48/000000/python.png) **Python**: Core programming language for text processing and analysis.
+- <img src="https://www.vectorlogo.zone/logos/nltk/nltk-icon.svg" alt="NLTK" height="48"/> **NLTK**: Used for Natural Language Processing and sentiment analysis.
+- <img src="https://raw.githubusercontent.com/github/explore/main/topics/jupyter-notebook/jupyter-notebook.png" alt="Jupyter" height="48"/> **Jupyter Notebooks**: For interactive data exploration and visualization.
 
-import re
-pattern = re.compile(r"Chapter [0-9]+")
-findings = re.findall(pattern, book)
-print("Chapters (regex method):", len(findings))
-```
+---
 
-**Description:**
-The number of chapters in the book is counted using two methods:
-- **String Method:** Counts occurrences of the word "Chapter".
-- **Regex Method:** Uses regular expressions to find all instances of chapter headings formatted as "Chapter [number]".
+### **Setup & Installation:**
 
-### 3. Extracting Sentences with the Word "love"
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/YourUsername/Book-Analysis.git
+   cd Book-Analysis
+   ```
 
-**Code:**
-```python
-pattern = re.compile(r"[A-Z][^.]*\blove\b[^.]*\.")
-findings = re.findall(pattern, book)
-print("Sentences with 'love':", findings)
-```
+2. **Install Required Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-**Description:**
-A regular expression is used to extract all sentences containing the word "love". The pattern ensures that the sentence starts with a capital letter and includes the word "love" surrounded by non-word characters to match it as a whole word.
+3. **Run Analysis Scripts:**
+   - Execute individual Python scripts or explore the data using Jupyter Notebooks.
 
-### 4. Finding the Most Used Words
+---
 
-**Code:**
-```python
-pattern = re.compile(r"[a-zA-Z]+")
-findings = re.findall(pattern, book.lower())
-print("First 5 words:", findings[:5])
+### **Usage:**
 
-d = {}
-for word in findings:
-    if word in d:
-        d[word] += 1
-    else:
-        d[word] = 1
+- **Text Analysis**: Run the scripts to analyze the text for chapter counts, word frequencies, and sentiment.
+- **Visualization**: Use the Jupyter Notebooks for further exploration and visualization of the analysis results.
 
-d_list = sorted([(value, key) for (key, value) in d.items()], reverse=True)
-print("5 most used words:", d_list[:5])
-```
+---
 
-**Description:**
-Words in the book are extracted and converted to lowercase. The frequency of each word is then counted and stored in a dictionary. The dictionary is converted to a list of tuples and sorted to find the most frequently used words.
+### **Contact:**
 
-### 5. Filtering Out Common English Stopwords
+For any inquiries or support, please contact:
 
-**Code:**
-```python
-import nltk
-nltk.download("stopwords")
-nltk.download('vader_lexicon')
+- **Name**: Farhan Shahriyar
+- **Email**: shahriyar@example.com
+- **GitHub**: [Shahriyar31](https://github.com/Shahriyar31)
 
-from nltk.corpus import stopwords
-english_stopwords = stopwords.words("english")
+---
 
-filtered_words = []
-for count, word in d_list:
-    if word not in english_stopwords:
-        filtered_words.append((word, count))
+**Book Analysis Project** offers a powerful framework for analyzing books and extracting meaningful insights using modern NLP techniques. Perfect for anyone interested in text analysis and natural language processing!
 
-print(filtered_words[:10])
-```
+---
 
-**Description:**
-The NLTK library is used to download and load English stopwords. The most frequent words list is filtered to remove common stopwords, resulting in a list of meaningful words and their counts.
+**Technologies Used:**
 
-### 6. Sentiment Analysis of the Entire Book
+<p align="center">
+  <img src="https://img.icons8.com/fluency/48/000000/python.png" alt="Python" height=48/>
+  <img src="https://www.nltk.org/images/logo.png" alt="NLTK" height="48"/>
+  <img src="https://raw.githubusercontent.com/github/explore/main/topics/jupyter-notebook/jupyter-notebook.png" alt="Jupyter" height= 48/>
+</p>
 
-**Code:**
-```python
-from nltk.sentiment import SentimentIntensityAnalyzer
-analyzer = SentimentIntensityAnalyzer()
-print(analyzer.polarity_scores(book))
-```
+---
 
-**Description:**
-The Sentiment Intensity Analyzer from NLTK's VADER lexicon is used to analyze the overall sentiment of the book. It outputs sentiment scores for negativity, neutrality, positivity, and a compound score.
-
-### 7. Sentiment Analysis of Individual Chapters
-
-**Code:**
-```python
-pattern = re.compile("Chapter [0-9]+")
-chapters = re.split(pattern, book)[1:]
-
-for nr, chapter in enumerate(chapters):
-    scores = analyzer.polarity_scores(chapter)
-    print(nr + 1, scores)
-```
-
-**Description:**
-The book is split into individual chapters using a regular expression. Each chapter's sentiment is analyzed using the Sentiment Intensity Analyzer, and the sentiment scores are printed for each chapter, helping identify the most positive and negative chapters.
-
-### Summary
-
-This project demonstrates how to load and analyze a book using Python and NLP techniques. It includes:
-1. Loading and processing the text.
-2. Counting chapters using different methods.
-3. Extracting sentences containing specific words.
-4. Finding and filtering the most frequently used words.
-5. Performing sentiment analysis on the entire book and individual chapters.
-
-The project provides insights into the text's structure, key terms, and sentiment, offering a comprehensive analysis of the book "Miracle in the Andes."
+This README should now provide a clear and visually appealing overview of your project with working logos for all technologies used!
